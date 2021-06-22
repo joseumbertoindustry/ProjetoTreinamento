@@ -1,0 +1,55 @@
+.login-center {
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    max-height: 330;
+    padding: 15px;
+    margin: auto;
+}
+
+.img-login {
+    width: 100%;
+    height: 84px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.forming {
+    margin: auto;
+    padding-top: 15%;
+}
+
+form {
+    padding: 4px 4px 4px 4px;
+    background-color: #F5F5DC;
+}
+
+form {
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 3px;
+    border-style: outset;
+}
+
+.mesmo-form {
+    padding: 4px 4px 4px 4px;
+    background-color: #F5F5DC;
+    border-radius: 3px;
+    border-style: outset;
+}
+
+#button-main {
+    width: 75%;
+}
+
+.main-imgs {
+    padding-top: 20px;
+}
+
+.margin-main {
+    margin: 5px;
+}
+
+.formOculto {
+    display: none;
+}
