@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sistema de Listagem</title>
+    {% load static %}
+		{% include './partials/estilos.html' %}  
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container-fluid">
+				<img src="{% static 'cidades/images/logo-industrycare.png' %}" width="122px" style="opacity: 0.25;">
+				<a class="navbar-brand" href="#" style="color: yellow;" >Menu</a>
+				<button id="button-main"class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Lista
+							</a>    
+							<ul class="dropdown-menu" aria-labelledby="navbarDropDownMenuLink">
+								<li><a class="dropdown-item" href="/tabela">Tabela</a></li>
+								<li><a class="dropdown-item" href="/insercao">Inserção de dados</a></li>
+							</ul>
+						</li>                        
+					</ul>
+				</div>         
+			</div>
+		</nav>
+		<main class="container margin-main">            
+			<img src="http://www.industrycare.com.br/wp-content/uploads/2020/04/tecnologias-industria40.png" class="rounded float-start main-imgs zoom_01" width="400px" height="300px" alt="...">
+			<img src="http://www.industrycare.com.br/wp-content/uploads/2020/04/industrycare_iots.jpg" class="rounded float-end main-imgs zoom_01" width="400px" height="300px" alt="...">
+		</main>		
+		<script src="{% static 'cidades/js/jquery.elevatezoom.js' %}"></script>
+		<script>
+			alert("Bem vindo ao sistema!")
+
+			$('.zoom_01').elevateZoom({
+				zoomType: "inner",
+				cursor: "crosshair",
+				zoomWindowFadeIn: 500,
+				zoomWindowFadeOut: 750
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include './partials/estilos.html' %}        
+    <title>IndustryCare System</title>
+  </head>
+  <body class="text-center">
+    <main class="login-center">
+      <img class="img-login" src="{% static 'cidades/images/logo-industrycare.png' %}">
+      <h3>Sistema de Listagem</h3>      
+			<form id="formulario" class="forming" action="/principal/" method="POST">        
+        {% csrf_token %}
+				{{ form }}
+        <div>
+					<span><a href="/esqueceu">Esqueceu a senha?</a></span>
+				</div>
+				<button id="enviar" class="mt-2 btn btn-primary" type="submit" disabled="disabled">Entrar</button>
+			</form>
+
+      {% if isNot %}
+      <div class="alert alert-danger mt-2" role="alert">
+        Problemas no usuário ou senha digitados
+      </div>
+      {% endif %}
+
+      {% if isNotForm %}
+      <div class="alert alert-danger mt-2" role="alert">
+        Formulário inválido
+      </div>
+      {% endif %}     
+
+    </main>    
+  </body>
+  <script>
+    $( document ).ready(function() { 
+      $("#formulario input").on("keyup", function(event) {                     
+      if(($("#email").val().length > 0) && ($("#pass").val().length > 0))
+        $("#enviar").attr("disabled", false)
+      else
+        $("#enviar").attr("disabled", true)
+      });
+    });
+  </script>
+</html>

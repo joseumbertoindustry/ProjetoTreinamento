@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+		{% include './partials/estilos.html' %} 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">		
+  </head>
+  <body>
+    <main class="container">
+			<div class="row my-5">
+				<div class="mesmo-form">
+					<div class="row">
+						<div class="col">
+							{% csrf_token %}
+							{{ CidadeTipo }}
+              <button onclick="history.go(-1)" id="voltar" class="mt-2 btn btn-primary" type="submit">Voltar</button>
+						</div>
+						<div class="col">
+							{% csrf_token %}
+							{{ bairro }}
+              <button id="enviar" onclick="cliquei()" class="mt-2 btn btn-primary" type="submit">Enviar</button>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</main>		 
+  </body>
+  <script>
+		
+		function cliquei() {
+			
+			let idcidade = $("#idcidade").val()
+			let idtipo = $("#idtipo").val()
+			let idbairro = $("#idbairro").val()
+			let bairro = $("#bairro").val()
+
+			datafromform = {"idcidade": idcidade, "idtipo": idtipo, "idbairro": idbairro, "bairro": bairro}
+			
+			$.ajax(
+				{
+					url: "/insert/data/",					
+					data: {
+						'idcidade': idcidade,
+						'idtipo': idtipo,
+						'idbairro': idbairro,
+						'bairro': bairro,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+					},
+					type: "POST",
+					success: function(result){
+						alert("Dados Inseridos")
+					}});
+		}
+    	
+			
+		
+	</script>
+</html>

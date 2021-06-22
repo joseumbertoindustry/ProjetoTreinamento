@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sistema de Listagem</title>    
+    {% include './partials/estilos.html' %} 
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">		
+	</head>
+	<body>
+		<main class="container">
+			<div class="row">
+				<form class="formOculto">
+					<div class="row">
+						<div class="col">
+							<input type="text" class="form-control" placeholder="Id Cidade">
+							<input type="text" class="form-control" placeholder="Id Tipo">
+						</div>
+						<div class="col">
+							<input type="text" class="form-control" placeholder="Id Bairro">
+							<input type="text" class="form-control" placeholder="Bairro">
+						</div>
+					</div>
+					<button id="enviar" class="mt-2 btn btn-primary" type="submit">Enviar</button>
+				</form>
+			</div>
+			<table id="tabela-user" class="table margin-main table-striped">
+				<thead>
+					<tr>
+						<th class="text-center" scope="col"><b><u>Marcar</u></b></th>
+						<th class="text-center" scope="col"><b><u>IdCidade</u></b></th>
+						<th class="text-center" scope="col"><b><u>IdTipo</u></b></th>
+						<th class="text-center" scope="col"><b><u>IdBairro</u></b></th>
+						<th class="text-center" scope="col"><b><u>Bairro</u></b></th>
+						<th class="text-center" scope="col"><b><u>Apagar</u></b></th>
+						<th class="text-center" scope="col"><b><u>Editar</u></b></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for cidade in cidades %}
+					<tr>
+						<th class="text-center" scope="row"> <input class="form-check-input" type="checkbox" /> </td>
+						<td class="text-center">{{ cidade.idCidade}}</td>
+						<td class="text-center">{{ cidade.idTipo}}</td>
+						<td class="text-center bairro-id">{{ cidade.idBairro}}</td>
+						<td class="text-center">{{ cidade.bairro}}</td>
+						<td class="text-center"><i class="bi bi-pencil-square"></i><button onclick="location.href = 'formlario/';" type="submit" class="btn btn-warning btn-sm btnEdit">Editar</button></td>
+						<td class="text-center"><i class="bi bi-trash"></i><button type="button" class="btn btn-danger btn-sm btnDelete">Excluir</button></td>
+					</tr>
+					{% endfor %}					
+				</tbody>
+			</table>
+		</main>
+		<script>
+      $("#tabela-user").on('click', '.btnDelete', function () {
+        $(this).closest('tr').remove();
+
+				let row = $(this).closest('tr')
+
+				let col = row.find(".bairro-id").html()
+
+				
+				
+				console.log( col )
+				
+				$.ajax(
+				{
+					url: "/delete/data/",					
+					data: {
+						'content': col,
+						'csrfmiddlewaretoken': '{{ csrf_token }}',
+					},
+					type: "POST",
+					success: function(result){
+						alert("Dados alterados")
+				}});
+				
+      });				
+		</script>
+	</body>
+</html>

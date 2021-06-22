@@ -1,0 +1,14 @@
+# Ambient
+venv
+.idea
+.env
+.coverage
+
+# Python
+*/_pycache_/
+*.pyc
+
+# Migrations directories
+*/migrations/
+
+db.sqlite3
