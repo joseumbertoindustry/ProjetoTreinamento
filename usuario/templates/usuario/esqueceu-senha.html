@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include './partials/estilos.html' %}        
+    <title>IndustryCare System</title>
+  </head>
+  <body class="container-fluid">
+    <main class="row">      
+      <div class="d-flex justify-content-center margin-box-cadastro">          
+        <div class="col-4 p-3 color-border border border-1 rounded shadow-lg">
+          <h5>Digite seu email</h5>          
+          <div class="form-group my-2">
+            <label>E-mail</label>
+            <input type="email" class="form-control" placeholder="Password">
+          </div>          
+          <div class="d-flex justify-content-end">            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </div>                    
+      </div>      
+    </main>
+  </body>
+  <script>
+    $( document ).ready(function() { 
+      $("#formulario input").on("keyup", function(event) {                     
+      if(($("#email").val().length > 0) && ($("#pass").val().length > 0))
+        $("#enviar").attr("disabled", false)
+      else
+        $("#enviar").attr("disabled", true)
+      });
+    });
+  </script>
+</html>
