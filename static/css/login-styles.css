@@ -1,3 +1,15 @@
+.margin-box-login {
+    padding-top: 10%;
+}
+
+.margin-box-cadastro {
+    padding-top: 5%;
+}
+
+.color-border {
+    background-color: #F0FFFF;
+}
+
 .login-center {
     width: 100%;
     max-width: 320px;

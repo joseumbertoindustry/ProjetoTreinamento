@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include './partials/estilos.html' %}        
+    <title>IndustryCare System</title>
+  </head>
+  <body class="container-fluid">
+    <main class="row">
+      <div class="d-flex justify-content-center">
+        <div class="row margin-box-login">          
+          <div class="col-12 py-3 color-border border border-1 rounded shadow-lg">
+            <div class="form-group my-2">
+              <label>Email address</label>
+              <input type="email" class="form-control" placeholder="Digite o e-mail">
+            </div>
+            <div class="form-group my-2">
+              <label>Password</label>
+              <input type="password" class="form-control" placeholder="Password">
+            </div>            
+            <div class="d-flex">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <a href="/esqueceu/">Esqueceu a senha?</a>
+            <br/>
+            <a href="/cadastro/">Ainda não é cadastrado?</a>
+          </div>          
+        </div>
+      </div>      
+    </main>
+  </body>
+
+
+  <!--
+  <body class="text-center">
+    <main class="login-center">
+      <img class="img-login" src="{% static 'images/logo-industrycare.png' %}">
+      <h3>Sistema de Listagem</h3>
+           
+			<form id="formulario" class="forming" action="/principal/" method="POST">        
+        {% csrf_token %}
+				{{ form }}
+        <div>
+					<span><a href="/esqueceu">Esqueceu a senha?</a></span>
+				</div>
+				<button id="enviar" class="mt-2 btn btn-primary" type="submit" disabled="disabled">Entrar</button>
+			</form>
+
+      {% if isNot %}
+      <div class="alert alert-danger mt-2" role="alert">
+        Problemas no usuário ou senha digitados
+      </div>
+      {% endif %}
+
+      {% if isNotForm %}
+      <div class="alert alert-danger mt-2" role="alert">
+        Formulário inválido
+      </div>
+      {% endif %}     
+
+    </main>
+    ADAOIDNAONDAODNAOKDNAONKDAODMNKAODNAODKNAODNOANKD 
+  </body>
+  -->
+  <script>
+    $( document ).ready(function() { 
+      $("#formulario input").on("keyup", function(event) {                     
+      if(($("#email").val().length > 0) && ($("#pass").val().length > 0))
+        $("#enviar").attr("disabled", false)
+      else
+        $("#enviar").attr("disabled", true)
+      });
+    });
+  </script>
+</html>
