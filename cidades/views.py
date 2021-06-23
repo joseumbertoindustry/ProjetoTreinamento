@@ -1,48 +1,41 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms.login import FormLogin, FormIdCidadeTipo, FormIdBairro
-from .models import User, Cidade
+from usuario.models import Usuario as User
 
-def login(request):  
-  return render(request, 'cidades/login.html', { "form": FormLogin })
-
-
-
-def esqueceu(request):
-  
-  return render(request, 'cidades/esqueceu.html')
+from .models import Cidade
 
 
 def principal(request):
+  
   if request.method == 'POST':
     
-    form = FormLogin(request.POST)
+    dados = request.POST
 
-    if form.is_valid():
-      
-      email = form.cleaned_data['email']
-      password = form.cleaned_data['password']
-      
-      mail_login = len(User.objects.filter(email=f"{email}"))
-      password_login = len(User.objects.filter(senha=f"{password}"))
-      
-      if (mail_login > 0) and (password_login > 0):
-        user = User.objects.filter(email=f"{email}")
-        request.session["user"] = user[0].id
+    email = dados['email']
 
-        return render(request, 'cidades/main.html')
+    password = dados['password']
 
-      else:
-        return render(request, 'cidades/login.html', { "form": FormLogin, 'isNot': True })        
-              
-    else:
-      return render(request, 'cidades/login.html', { "form": FormLogin, 'isNotForm': True })
+    query_result = User.objects.filter(email=f"{email}", password=f"{password}")
+    
+    print(query_result)
+
+    if len(query_result) > 0:
       
+      request.session["email"] = email
+      request.session["password"] = password
+      print("AQUI")
+      return render(request, 'cidades/principal.html', content_type='text/html')
+
   else:
-    return redirect('/')
-
-
+    print("AQUI2")
+    if (request.session.has_key("email")) and (request.session.has_key("password")):
+      print("AQUI3")
+      return render(request, 'cidades/principal.html')
+    
+    else:
+      print("AQUI4")
+      return redirect('/')
 
 def tabela(request):
 
