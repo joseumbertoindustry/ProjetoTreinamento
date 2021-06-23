@@ -7,41 +7,74 @@
   </head>
   <body class="container-fluid">
     <main class="row">      
-      <div class="d-flex justify-content-center margin-box-cadastro">          
-        <div class="col-4 p-3 color-border border border-1 rounded shadow-lg">
-          <h5>Preencha os dados para realizar o cadastro</h5>
-          <div class="form-group my-2">
-            <label>Nome</label>
-            <input type="text" class="form-control" placeholder="Digite o e-mail">
+      <div class="d-block">          
+        <div class="row justify-content-center margin-box-cadastro">
+          <div class="col-4 p-3 color-border border border-1 rounded shadow-lg">
+            <h5>Preencha os dados para realizar o cadastro</h5>
+            <div class="form-group my-2">
+              <label>Nome</label>
+              <input id="nome" type="text" class="form-control" placeholder="Digite o e-mail">
+            </div>
+            <div class="form-group my-2">
+              <label>E-mail</label>
+              <input id="email" type="email" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group my-2">
+              <label>Password</label>
+              <input id="password" type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group my-2">
+              <label>Reescreva seu password</label>
+              <input type="password" class="form-control" placeholder="Password">
+            </div>            
+            <div class="d-flex justify-content-around">
+              <button type="submit" class="btn btn-primary" onclick="history.go(-1)">Voltar</button>
+              <button type="submit" class="btn btn-primary" onclick="cadastrar()">Enviar</button>
+            </div>
           </div>
-          <div class="form-group my-2">
-            <label>E-mail</label>
-            <input type="email" class="form-control" placeholder="Password">
+        </div>
+        <div class="row">
+          <div class="col-4 offset-4">
+            <div id="campos-vazios" class="alert alert-warning my-3" role="alert">
+            Preencha os campos!!
+            </div>
+            <div id="email-n-existe" class="alert alert-danger my-3" role="alert">
+              Preencha os campos!!
+            </div>
           </div>
-          <div class="form-group my-2">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password">
-          </div>
-          <div class="form-group my-2">
-            <label>Reescreva seu password</label>
-            <input type="password" class="form-control" placeholder="Password">
-          </div>            
-          <div class="d-flex justify-content-around">
-            <button type="submit" class="btn btn-primary">Voltar</button>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-          </div>
-        </div>                    
+        </div>
       </div>      
     </main>
   </body>
   <script>
-    $( document ).ready(function() { 
-      $("#formulario input").on("keyup", function(event) {                     
-      if(($("#email").val().length > 0) && ($("#pass").val().length > 0))
-        $("#enviar").attr("disabled", false)
-      else
-        $("#enviar").attr("disabled", true)
+
+     $(function() {
+        $("#campos-vazios").hide()
+        $("#email-n-existe").hide()      
       });
-    });
+
+    let cadastrar = () => { 
+      let email = $("#email").val()
+      let password = $("#password").val()
+      let nome = $("#nome").val()
+
+      if((email.length <= 0) || (password.length <= 0) || (nome.length <= 0)) {
+        $("#campos-vazios").show()
+        return
+      }
+
+      $.ajax({
+        url: "/validacao/dados/",					
+        data: {
+          'email': email,
+          'password': password,						
+          'csrfmiddlewaretoken': '{{ csrf_token }}',
+      },type: "POST",
+        success: function(result){
+          alert("Dados alterados")
+        } 
+      });
+
+		}
   </script>
 </html>
