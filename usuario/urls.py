@@ -1,10 +1,12 @@
 from django.urls import path
 
-from . import views
+from usuario.views.usuario import Usuario
+from usuario.views.login import Login
 
 urlpatterns = [
-  path('', views.to_login, name='tologin'),
-  path('login/', views.login, name='login'),
-  path('login/cadastro/', views.cadastro, name='cadastro'),
-  path('login/esqueceu-senha/', views.esqueceu_senha, name='esqueceu')
+  path('', Login.to_login, name='tologin'),
+  path('login/', Login.login, name='login'),
+  path('login/cadastro/', Usuario.cadastro, name='cadastro'),
+  path('login/esqueceu-senha/', Usuario.esqueceu_senha, name='esqueceu'),
+  path('validacao/dados/', Usuario.is_usuario, name="is_usuario")
 ]

@@ -29,10 +29,10 @@
         <div class="row">
           <div class="col-4 offset-4">
             <div id="campos-vazios" class="alert alert-warning my-3" role="alert">
-            Preencha os campos!!
-            </div>
-            <div id="email-n-existe" class="alert alert-danger my-3" role="alert">
               Preencha os campos!!
+            </div>
+            <div id="invalidos" class="alert alert-danger my-3" role="alert">
+              Dados inexistentes!!
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
 
     $(function() {
       $("#campos-vazios").hide()
-      $("#email-n-existe").hide()      
+      $("#invalidos").hide()      
     });
 
     let login = () => { 
@@ -57,14 +57,16 @@
       }
 
       $.ajax({
-        url: "/validacao/dados/",					
+        url: "/cidades/principal/",					
         data: {
           'email': email,
           'password': password,						
           'csrfmiddlewaretoken': '{{ csrf_token }}',
       },type: "POST",
-        success: function(result){
-          alert("Dados alterados")
+        success: function(response){
+          console.log("fasfasf", response)
+          if(response.result == "OK")
+            console.log("Foi")
         } 
       });
 
